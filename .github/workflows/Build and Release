@@ -1,31 +1,53 @@
-name: Cross-platform build
+name: Build and Release
 
 on:
   push:
     branches:
       - main
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  BUILD_VERSION: v$(date +'%Y.%m.%d')-$(git rev-parse --short HEAD)
+
 jobs:
   build:
+    name: Build and package
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.20
-
-      - name: Generate build files
-        run: go mod init example.com/demo
-
-      - name: Build
+      - name: Build for multiple platforms
         uses: thatisuday/go-cross-build@v1
         with:
           platforms: linux/amd64, darwin/amd64, windows/amd64
           package: .
           name: program
           compress: true
-          dest: ./
+          dest: ./build
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.BUILD_VERSION }}
+          release_name: Release ${{ env.BUILD_VERSION }}
+          body: |
+            Changes in this release:
+            - Add new feature X
+            - Fix issue Y
+          draft: false
+          prerelease: false
+
+      - name: Upload binaries
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/program_*.zip
+          asset_name: program_${{ env.BUILD_VERSION }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+          asset_content_type: application/zip
