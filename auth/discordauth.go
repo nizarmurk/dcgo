@@ -16,7 +16,13 @@ func DiscordAuth() {
 		fmt.Println(err)
 		return
 	}
-	session.Open()
+
+	defer session.Close()
+	err = session.Open()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	// Signal-Handler hinzufügen
 	sigChan := make(chan os.Signal, 1)
