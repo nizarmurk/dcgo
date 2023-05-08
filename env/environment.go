@@ -13,6 +13,14 @@ var (
 	BOTNAME string
 )
 
+func getEnvVariable(key string, defaultValue string) string {
+	value, ok := os.LookupEnv(key)
+	if !ok {
+		fmt.Println(defaultValue)
+	}
+	return value
+}
+
 func Env() {
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -29,12 +37,4 @@ func Env() {
 	// DBNAME = getEnvVariable("DBNAME", "No Database name defined in env vars.")
 	// DBPORT = getEnvVariable("DBPORT", "No Database port defined in env vars.")
 	// DBSSL = getEnvVariable("DBSSL", "No Database ssl defined in env vars.")
-}
-
-func getEnvVariable(key string, defaultValue string) string {
-	value, ok := os.LookupEnv(key)
-	if !ok {
-		fmt.Println(defaultValue)
-	}
-	return value
 }
