@@ -14,7 +14,7 @@ jobs:
           go-version: 1.16.x
       - name: Build Go Binary
         run: |
-          cd ./...
+          cd ./
           go build -o program
       - name: Create Release
         id: create_release
@@ -35,7 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./...
+          asset_path: ./
           asset_name: program
           asset_content_type: application/octet-stream
           
