@@ -1,5 +1,9 @@
 # dcgo
 
+**Status**
+
+[![Go](https://github.com/nizarmurk/dcgo/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/nizarmurk/dcgo/actions/workflows/go.yml)
+
 **Compile Code**
 
 You can compile this code with
