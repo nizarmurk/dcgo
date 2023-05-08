@@ -53,4 +53,4 @@ jobs:
             package: 'demo'
             name: 'program'
             compress: 'true'
-            dest: './'
+            dest: './...'
