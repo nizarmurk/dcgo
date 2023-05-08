@@ -8,33 +8,83 @@ import (
 )
 
 var (
-	TOKEN   string
-	PREFIX  string
-	BOTNAME string
+	TOKEN string
+	// BOTNAME string
+	// PREFIX     string
+	// DATABASE   string
+	// DBUSERNAME string
+	// DBPASSWORD string
+	// DBHOST     string
+	// DBNAME     string
+	// DBPORT     string
+	// DBSSL      string
 )
 
-func getEnvVariable(key string, defaultValue string) string {
-	value, ok := os.LookupEnv(key)
-	if !ok {
-		fmt.Println(defaultValue)
-	}
-	return value
-}
-
 func Env() {
+
+	//LOAD ENV DATA
 	err := godotenv.Load(".env")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	TOKEN = getEnvVariable("TOKEN", "No Token defined in env vars.")
-	BOTNAME = getEnvVariable("BOTNAME", "No Botname defined in env vars.")
-	// PREFIX = getEnvVariable("PREFIX", "No Prefix defined in env vars.")
-	// DATABASE = getEnvVariable("DATABASE", "No Database defined in env vars.")
-	// DBUSERNAME = getEnvVariable("DBUSERNAME", "No Database username defined in env vars.")
-	// DBPASSWORD = getEnvVariable("DBPASSWORD", "No Database password defined in env vars.")
-	// DBHOST = getEnvVariable("DBHOST", "No Database host defined in env vars.")
-	// DBNAME = getEnvVariable("DBNAME", "No Database name defined in env vars.")
-	// DBPORT = getEnvVariable("DBPORT", "No Database port defined in env vars.")
-	// DBSSL = getEnvVariable("DBSSL", "No Database ssl defined in env vars.")
+	uToken, check := os.LookupEnv("TOKEN")
+	if !check {
+		fmt.Println("No Token defined in env vars.")
+	}
+	TOKEN = uToken
+
+	// uBotname, check := os.LookupEnv("BOTNAME")
+	// if !check {
+	// 	fmt.Println("No Botname defined in env vars.")
+	// }
+	// BOTNAME = uBotname
+
+	// uPrefix, check := os.LookupEnv("PREFIX")
+	// if !check {
+	// 	fmt.Println("No Prefix defined in env vars.")
+	// }
+	// PREFIX = uPrefix
+
+	// db, check := os.LookupEnv("DATABASE")
+	// if !check {
+	// 	fmt.Println("No Database defined in env vars.")
+	// }
+	// DATABASE = db
+
+	// dbusername, check := os.LookupEnv("DBUSERNAME")
+	// if !check {
+	// 	fmt.Println("No Database username defined in env vars.")
+	// }
+	// DBUSERNAME = dbusername
+
+	// dbpassword, check := os.LookupEnv("DBPASSWORD")
+	// if !check {
+	// 	fmt.Println("No Database password defined in env vars.")
+	// }
+	// DBPASSWORD = dbpassword
+
+	// dbhost, check := os.LookupEnv("DBHOST")
+	// if !check {
+	// 	fmt.Println("No Database host defined in env vars.")
+	// }
+	// DBHOST = dbhost
+
+	// dbname, check := os.LookupEnv("DBNAME")
+	// if !check {
+	// 	fmt.Println("No Database name defined in env vars.")
+	// }
+	// DBNAME = dbname
+
+	// dbport, check := os.LookupEnv("DBPORT")
+	// if !check {
+	// 	fmt.Println("No Database port defined in env vars.")
+	// }
+	// DBPORT = dbport
+
+	// dbssl, check := os.LookupEnv("DBSSL")
+	// if !check {
+	// 	fmt.Println("No Database ssl defined in env vars.")
+	// }
+	// DBSSL = dbssl
 }
