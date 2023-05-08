@@ -22,4 +22,4 @@ jobs:
             package: ''
             name: 'dcgo'
             compress: 'true'
-            dest: 'dist'
+            dest: ''
