@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
+	env.Env()
 	core.Core()
 	auth.DiscordAuth()
-	env.Env()
 }
