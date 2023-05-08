@@ -26,3 +26,8 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+      
+    - name: Cosmos Gosec Security Checker
+      uses: cosmos/gosec@v0.0.8
+      with:
+        args: -h
