@@ -10,9 +10,9 @@ jobs:
         go-version: ${{ env.GOVERSION }}
     - name: Download dependencies
       run: go mod download
-    - name: Build
+    - name: Build-Release
       run: go build -o dcgo ./cmd/dcgo
-    - name: Create Release
+    - name: Create-Release-Build
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
