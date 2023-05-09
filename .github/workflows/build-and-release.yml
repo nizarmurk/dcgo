@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
@@ -15,6 +16,14 @@ jobs:
           go-version: 1.20.2
       - name: Get dependencies
         run: go mod download
+      - name: Bump Version and Create Tag
+        uses: mathieudutour/github-tag-action@v5
+        id: version
+        with:
+          github_token: ${{ secrets.GIT_TOKEN }}
+          prefix: 'v'
+          major_version: 1
+          minor_version: 0
       - name: Build for Linux
         run: GOOS=linux GOARCH=amd64 go build -o dcgo-linux main.go
       - name: Create Release
@@ -23,8 +32,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
         with:
-          tag_name: v1.0.0
-          release_name: Release v1.0.0
+          tag_name: ${{ steps.version.outputs.tag }}
+          release_name: Release ${{ steps.version.outputs.tag }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
