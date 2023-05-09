@@ -37,3 +37,4 @@ jobs:
           asset_path: ./dcgo-linux
           asset_name: dcgo-linux
           asset_content_type: application/octet-stream
+
