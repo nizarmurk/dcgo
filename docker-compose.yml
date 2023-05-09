@@ -1,0 +1,13 @@
+version: "3.2"
+services:
+  app:
+    build: .
+    image: nizar/dcgo:latest
+    restart: always
+    volumes:
+      - data:/go
+    env_file:
+      - .env
+
+volumes:
+  data:
