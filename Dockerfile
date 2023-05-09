@@ -1,6 +1,6 @@
 FROM golang:latest as builder
 
-WORKDIR $GOPATH/src/git.ucode.space/nizar/dcgo
+WORKDIR $GOPATH/src/github.com/nizarmurk/dcgo
 
 ENV CGO_ENABLED=0
 
