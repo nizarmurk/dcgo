@@ -17,5 +17,8 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+# ignore other stuff
+*.env
+
 # Go workspace file
 go.work
